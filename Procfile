@@ -1,1 +1,1 @@
-web: go run data.go server.go
+web: data.go server.go

@@ -79,7 +79,7 @@ func main() {
 	router.HandleFunc("/stoptime/{routeID}-{directionID}-{stopID}", getStopTimes).Methods("GET")
 	router.HandleFunc("/trip/{routeID}-{directionID}", getTrips).Methods("GET")
 	//fmt.Println()
-	log.Fatal(http.ListenAndServe(os.Getenv("PORT"), router))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), router))
 
 }
 

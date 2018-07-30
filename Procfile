@@ -1,1 +1,1 @@
-web: kazeserver
+web: kazebus

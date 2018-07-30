@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -11,9 +12,9 @@ var Db *sql.DB
 
 // InitDb connects to the Db
 func InitDb() {
-	connStr := "user=postgres dbname=kazebus  password=12345 "
+	//connStr := "user=postgres dbname=kazebus  password=12345 "
 	var err error
-	Db, err = sql.Open("postgres", connStr)
+	Db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		fmt.Println(err)
 	}

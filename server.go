@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -77,7 +78,8 @@ func main() {
 	router.HandleFunc("/route/{id}", getRoute).Methods("GET")
 	router.HandleFunc("/stoptime/{routeID}-{directionID}-{stopID}", getStopTimes).Methods("GET")
 	router.HandleFunc("/trip/{routeID}-{directionID}", getTrips).Methods("GET")
-	log.Fatal(http.ListenAndServe(":8000", router))
+	//fmt.Println()
+	log.Fatal(http.ListenAndServe(os.Getenv("PORT"), router))
 
 }
 

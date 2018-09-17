@@ -11,10 +11,9 @@ var Db *sql.DB
 
 // InitDb connects to the Db
 func InitDb() {
-	//connStr := "user=postgres dbname=kazebus  password=transport"
+	
 	var err error
-	Db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
-	//Db, err = sql.Open("postgres","user=postgres dbname=kazebus  password=trans@2015port")
+	Db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))	
 	if err != nil {
 		fmt.Println(err)
 	}

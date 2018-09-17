@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"log"
-	"net/http"
-	"os"
+	"net/http"	
 	"strconv"
-
+	 "os"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 )
@@ -78,8 +78,19 @@ func main() {
 	router.HandleFunc("/route/{id}", getRoute).Methods("GET")
 	router.HandleFunc("/stoptime/{routeID}-{directionID}-{stopID}", getStopTimes).Methods("GET")
 	router.HandleFunc("/trip/{routeID}-{directionID}", getTrips).Methods("GET")
-	//fmt.Println()
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), router))
+	
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
+	originsOk := handlers.AllowedOrigins([]string{"*"})
+	methodsOk := handlers.AllowedMethods([]string{"GET"})
+
+	// start server listen
+	// with error handling
+	// Testing at localhost only
+	//log.Fatal(http.ListenAndServe(":8000", handlers.CORS(originsOk, headersOk, methodsOk)(router)))
+
+	// For Heroku 
+	//log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), router))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), handlers.CORS(originsOk, headersOk, methodsOk)(router)))
 
 }
 
